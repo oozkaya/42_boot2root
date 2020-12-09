@@ -1,0 +1,4 @@
+*.iso
+Boot2Root
+*.log
+.gdb_history
