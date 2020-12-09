@@ -2,8 +2,8 @@
 
 CURDIR=`dirname $0`
 
-MACHINENAME="Boot2root"
-ISOPATH="$CURDIR/BornToSecHackMe-v1.1.iso"
+MACHINENAME="Boot2Root"
+ISOPATH="$CURDIR/Boot2Root.iso"
 ISO_INTRA_LOCATION="https://projects.intra.42.fr/uploads/document/document/2527/BornToSecHackMe-v1.1.iso"
 START_VM_SCRIPT="$CURDIR/startVM.sh"
 
