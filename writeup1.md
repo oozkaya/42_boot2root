@@ -2,9 +2,7 @@
 
 ## Get VM IP
 
-Requirements:
-
-- VirtualBox Guest Addition
+Requirements: `VirtualBox Guest Addition`
 
 As there is no visible IP in the virtual machine, we need to find the IP.
 
@@ -24,7 +22,7 @@ export BR_HOST=$VM_IP
 
 ## Scan Ports
 
-Requirements: nmap
+Requirements: `nmap`
 
 Now we have the IP, we can scan the open ports with `nmap`
 
@@ -52,7 +50,7 @@ Lets investigate the ports 80 (http) and 443 (https)
 
 ### Port 80
 
-Requirements: dirb or dirbuster
+Requirements: `dirb`
 
 ```shell
 dirb http://192.168.1.74
@@ -143,7 +141,7 @@ function generate_pw_hash($pw)
 }
 ```
 
-The algorithm is SHA-1 and a selt of 10 characters if append as suffix.
+The algorithm is SHA-1 and a salt of 10 characters is append as suffix.
 
 Unfortunately, we never succeed to unhash the passwords.
 
@@ -159,6 +157,7 @@ INTO OUTFILE '/var/www/phpMyAdmin/cmd.php'
 ```
 
 Unfortunately, we can not write at `/var/www/phpMyAdmin/cmd.php`, but it works if the path is `/tmp/aaa`. We need to find a path with correct rights.
+
 ![](images/webshell_cant_write.png)
 
 `dirb` tool could maybe help us.
@@ -194,6 +193,7 @@ dirb https://192.168.1.74
 | `/var/www/forum/templates_c/cmd.php` | ✅ Your SQL query has been executed successfully |
 
 Cool, lets check it out at https://192.168.1.74/forum/templates_c/cmd.php
+
 ![](images/webshell_test.png)
 
 We have a shell-like
