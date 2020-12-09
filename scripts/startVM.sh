@@ -23,8 +23,9 @@ n=0
 until [ "$n" -ge 60 ]
 do
     MAC_ADDRESS=`VBoxManage showvminfo $VM_NAME | grep -oP 'MAC: \K[^",]+' | sed -e 's/[0-9A-F]\{2\}/&:/g' -e 's/:$//'`
-    VM_IP=`ip neighbor | grep -i $MAC_ADDRESS | cut -d' ' -f1`
+    # VM_IP=`ip neighbor | grep -i $MAC_ADDRESS | cut -d' ' -f1`
     # VM_IP=`VBoxManage guestproperty enumerate $VM_NAME | grep -i ip | grep -ioP 'value: \K[^,]+'`
+    VM_IP=`vboxmanage guestproperty get Boot2root "/VirtualBox/GuestInfo/Net/0/V4/IP" | sed -n 's/Value: //p'`
     if [ -n "$VM_IP" ]; then break; fi
     n=$((n+1)) 
     sleep 1
