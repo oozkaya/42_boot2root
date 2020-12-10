@@ -223,7 +223,7 @@ cat /home/LOOKATME/password
 
 We tried this credentials through ssh, then ftp. It works through ftp !
 
-## ftp connection
+## FTP lmezard - Exploit fun file
 
 | Protocol / App | Login     | Password           |
 | -------------- | --------- | ------------------ |
@@ -283,52 +283,19 @@ While displaying the `fun` file, we saw there was a mix of tar archive containin
 In the middle of the file, there was a main and some `getme#()` functions:
 
 ```C
-char getme1() {
-    return 'I';
-}
-
-char getme2() {
-    return 'h';
-}
-
-char getme3() {
-    return 'e';
-}
-
-char getme4() {
-    return 'a';
-}
-
-char getme5() {
-    return 'r';
-}
-
-char getme6() {
-    return 't';
-}
-
-char getme7() {
-    return 'p';
-}
-
 char getme8() {
-    return 'w';
+  return 'w'
 }
-
 char getme9() {
-    return 'n';
+  return 'n';
 }
-
 char getme10() {
-    return 'a';
+  return 'a';
 }
-
 char getme11() {
     return 'g';
 }
-
-char getme12()
-{
+char getme12() {
     return 'e';
 }
 
@@ -365,6 +332,139 @@ int main() {
 	printf("Now SHA-256 it and submit");
 }
 ```
+
+Unfortunately, the first seven `getme#()` functions do not return any character:
+
+```
+//file211               (...)          char getme1() {
+//file5                 (...)          	printf("Hahahaha Got you!!!\n");
+//file544               (...)          }void useless() {
+```
+
+If we extract the archive (`tar -xvf fun`), we can see 3028 \*.pcap files. But they are not pcap files, they are simple text files.
+
+For better readability, we display all the files as one file
+
+```shell
+awk 'FNR==1 {print FILENAME}; {print "\t" $0}' ./* > output
+```
+
+Now we can search easily
+
+```shell
+grep -A2 -w "getme1" output
+	char getme1() {
+	//file5
+  (...)
+```
+
+It seemś the files are splitted and mixed. Lets check in next file: file6
+
+```shell
+grep -B3 -w "file6" output
+./APM1E.pcap
+		return 'I';
+	//file6
+```
+
+We have the return of the function `getme1()`. We will do that for each missing functions.
+
+```C
+char getme1() {
+    return 'I';
+}
+char getme2() {
+    return 'h';
+}
+char getme3() {
+    return 'e';
+}
+char getme4() {
+    return 'a';
+}
+char getme5() {
+    return 'r';
+}
+char getme6() {
+    return 't';
+}
+char getme7() {
+    return 'p';
+}
+char getme8() {
+    return 'w';
+}
+char getme9() {
+    return 'n';
+}
+char getme10() {
+    return 'a';
+}
+char getme11() {
+    return 'g';
+}
+char getme12()
+{
+    return 'e';
+}
+```
+
+Now we should encrypt it with SHA-256 and use the result as password for user 'laurie' to login in ssh
+
+```shell
+echo -n Iheartpwnage | sha256sum
+  330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4  -
+```
+
+It works !
+
+## SSH laurie - Exploit bomb file
+
+| Protocol / App | Login    | Password                                                           |
+| -------------- | -------- | ------------------------------------------------------------------ |
+| ssh            | `laurie` | `330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4` |
+
+```ssh
+ssh laurie@192.168.1.74
+ls -l
+-rwxr-x--- 1 laurie laurie   158 Oct  8  2015 README
+-rwxr-x--- 1 laurie laurie 26943 Oct  8  2015 bomb
+
+cat README
+  Diffuse this bomb!
+  When you have all the password use it as "thor" user with ssh.
+
+  HINT:
+  P
+  2
+  b
+
+  o
+  4
+
+  NO SPACE IN THE PASSWORD (password is case sensitive).
+
+ ./bomb
+  Welcome this is my little bomb !!!! You have 6 stages with
+  only one life good luck !! Have a nice day!
+  aaa
+
+  BOOM!!!
+  The bomb has blown up.
+```
+
+We have 6 stages to unlock and maybe find a password.
+
+Using Ghidra and some reverse engineering scripts, we found the six pass:
+
+|         |                                 |
+| ------- | ------------------------------- |
+| Stage 1 | `Public speaking is very easy.` |
+| Stage 2 | `1 2 6 24 120 720`              |
+| Stage 3 | `0 q 777`                       |
+| Stage 4 | `9`                             |
+| Stage 5 | `opekma`                        |
+| Stage 6 | ``                              |
 
 ---
 
