@@ -44,4 +44,10 @@ nmap $B2R_HOST
 
 ## Hack
 
+-[DIRB](https://www.kali-linux.fr/forum/index.php?topic=1916.0)
+
+## VM
+
+-[Find IP of VM](https://unix.stackexchange.com/questions/350913/how-to-find-ip-of-virtual-machine)
+
 ## Man
