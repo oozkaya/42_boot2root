@@ -463,8 +463,15 @@ Using Ghidra and some reverse engineering scripts, we found the six pass:
 | Stage 2 | `1 2 6 24 120 720`              |    reverse    |
 | Stage 3 | `1 b 214`                       |    reverse    |
 | Stage 4 | `9`                             |   phase_4.c   |
-| Stage 5 | `opekma`                        |   phase_5.c   |
+| Stage 5 | `opekmq`                        |   phase_5.c   |
 | Stage 6 | `4 2 6 3 1 5`                   |   phase_6.sh  |
+
+Now we need to concatenate all the stages passwords and remove spaces to get thor's ssh pw
+(We had to swap the n-1 and n-2 of Stage 6 to obtain the right pw)
+
+We can now login as thor:
+`su thor`
+`> Password: Publicspeakingisveryeasy.126241207201b2149opekmq426135`
 
 ---
 
@@ -477,6 +484,7 @@ Using Ghidra and some reverse engineering scripts, we found the six pass:
 | phpMyAdmin     | `root`                 | `Fg-'kKXBj87E:aJ$`                                                 |
 | ftp            | `lmezard`              | `G!@M6f4Eatau{sF"`                                                 |
 | ssh            | `laurie`               | `330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4` |
+| ssh            | `thor`                 | `Publicspeakingisveryeasy.126241207201b2149opekmq426135`           |
 
 ### Sources
 
