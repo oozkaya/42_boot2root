@@ -1,5 +1,9 @@
-void phase_defused(void)
+// This code is not compilable
+// This code contains main functions but not all of them
 
+#include <stdio.h>
+
+void phase_defused(void)
 {
     int iVar1;
     undefined local_58[4];
@@ -24,7 +28,6 @@ void phase_defused(void)
 }
 
 void phase_1(undefined4 param_1)
-
 {
     int iVar1;
 
@@ -37,7 +40,6 @@ void phase_1(undefined4 param_1)
 }
 
 void phase_2(undefined4 param_1)
-
 {
     int iVar1;
     int aiStack32[7];
@@ -60,7 +62,6 @@ void phase_2(undefined4 param_1)
 }
 
 void phase_3(char *param_1)
-
 {
     int iVar1;
     char cVar2;
@@ -143,7 +144,6 @@ void phase_3(char *param_1)
 }
 
 void phase_4(char *param_1)
-
 {
     int iVar1;
     int local_8;
@@ -162,7 +162,6 @@ void phase_4(char *param_1)
 }
 
 void phase_5(int param_1)
-
 {
     int iVar1;
     undefined local_c[6];
