@@ -457,14 +457,14 @@ We have 6 stages to unlock and maybe find a password.
 
 Using Ghidra and some reverse engineering scripts, we found the six pass:
 
-|         |                                 |
-| ------- | ------------------------------- |
-| Stage 1 | `Public speaking is very easy.` |
-| Stage 2 | `1 2 6 24 120 720`              |
-| Stage 3 | `0 q 777`                       |
-| Stage 4 | `9`                             |
-| Stage 5 | `opekma`                        |
-| Stage 6 | ``                              |
+|         |                                 |     Method    |
+| ------- | ------------------------------- |---------------|
+| Stage 1 | `Public speaking is very easy.` |    reverse    |
+| Stage 2 | `1 2 6 24 120 720`              |    reverse    |
+| Stage 3 | `1 b 214`                       |    reverse    |
+| Stage 4 | `9`                             |   phase_4.c   |
+| Stage 5 | `opekma`                        |   phase_5.c   |
+| Stage 6 | `4 2 6 3 1 5`                   |   phase_6.sh  |
 
 ---
 
