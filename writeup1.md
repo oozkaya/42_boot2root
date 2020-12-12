@@ -117,6 +117,7 @@ Many people uses the same password everywhere. Does `lmezard` do it ?
 We try to connect with: `laurie@borntosec.com`:`!q\]Ej?*5K5cy*AJ`
 
 It works ! There is two mails. One object mail is: "DB ACCESS"
+
 ![](images/mail_db_access.png)
 
 #### /phpmyadmin
@@ -457,14 +458,14 @@ We have 6 stages to unlock and maybe find a password.
 
 Using Ghidra and some reverse engineering scripts, we found the six pass:
 
-|         |                                 |     Method    |
-| ------- | ------------------------------- |---------------|
-| Stage 1 | `Public speaking is very easy.` |    reverse    |
-| Stage 2 | `1 2 6 24 120 720`              |    reverse    |
-| Stage 3 | `1 b 214`                       |    reverse    |
-| Stage 4 | `9`                             |   phase_4.c   |
-| Stage 5 | `opekmq`                        |   phase_5.c   |
-| Stage 6 | `4 2 6 3 1 5`                   |   phase_6.sh  |
+|         |                                 | Method                                       |
+| ------- | ------------------------------- | -------------------------------------------- |
+| Stage 1 | `Public speaking is very easy.` | reverse ([source](sources/bomb.c))           |
+| Stage 2 | `1 2 6 24 120 720`              | reverse ([source](sources/bomb.c))           |
+| Stage 3 | `1 b 214`                       | reverse ([source](sources/bomb.c))           |
+| Stage 4 | `9`                             | [phase_4.c](scripts/levels/bomb/phase_4.c)   |
+| Stage 5 | `opekmq`                        | [phase_5.c](scripts/levels/bomb/phase_5.c)   |
+| Stage 6 | `4 2 6 3 1 5`                   | [phase_6.sh](scripts/levels/bomb/phase_6.sh) |
 
 Now we need to concatenate all the stages passwords and remove spaces to get thor's ssh pw
 (We had to swap the n-1 and n-2 of Stage 6 to obtain the right pw)
@@ -475,7 +476,7 @@ We can now login as thor:
 
 ---
 
-### Passwords
+## Passwords
 
 | Protocol / App | Login                  | Password                                                           |
 | -------------- | ---------------------- | ------------------------------------------------------------------ |
@@ -486,22 +487,22 @@ We can now login as thor:
 | ssh            | `laurie`               | `330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4` |
 | ssh            | `thor`                 | `Publicspeakingisveryeasy.126241207201b2149opekmq426135`           |
 
-### Sources
+## Sources
 
-## Hack
+### Hack
 
 - [5 Ways to Directory Bruteforcing on Web Server](https://www.hackingarticles.in/5-ways-directory-bruteforcing-web-server/)
 - [Linux Hacking Case Studies Part 3: phpMyAdmin](https://blog.netspi.com/linux-hacking-case-studies-part-3-phpmyadmin/)
 
-## WebShell
+### WebShell
 
 - [phpMyAdminWebShell.sql](https://github.com/nullbind/Other-Projects/blob/master/random/phpMyAdminWebShell.sql)
 
-## Sources
+### Sources
 
 - [mylittleforum sources](https://github.com/ilosuna/mylittleforum)
 
-## Man
+### Man
 
 - [nmap](https://linux.die.net/man/1/nmap)
 - [dirb](https://tools.kali.org/web-applications/dirb)
