@@ -1,5 +1,4 @@
 *.iso
 Boot2Root
 Boot2root
-*.log
 .gdb_history

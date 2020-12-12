@@ -32,4 +32,34 @@ chmod +x /tmp/LinEnum.sh
 /tmp/LinEnum.sh -k keyword -r report -e /tmp/
 ```
 
-[Report here](logs/LinEnum-export-10-12-20)
+[Report here](logs/LinEnum-export-10-12-20.html)
+
+## linPEAS.sh
+
+LinPEAS is a script that search for possible paths to escalate privileges on Linux/Unix\* hosts. The checks are explained on book.hacktricks.xyz
+
+Check the Local Linux Privilege Escalation checklist from [book.hacktricks.xyz](https://book.hacktricks.xyz/linux-unix/privilege-escalation)
+
+[https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS)
+
+```shell
+curl https://raw.githubusercontent.com/carlospolop/privilege-escalation-awesome-scripts-suite/master/linPEAS/linpeas.sh | sh > linPEAS.log
+```
+
+[Report here](logs/linPEAS.html)
+
+## LES: Linux privilege escalation auditing tool
+
+LES tool is designed to assist in detecting security deficiencies for given Linux kernel/Linux-based machine. It provides following functionality:
+
+- Assessing kernel exposure on publicly known exploits
+- Verifying state of kernel hardening security measures
+
+[https://github.com/mzet-/linux-exploit-suggester](https://github.com/mzet-/linux-exploit-suggester)
+
+```shell
+wget https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh -O les.sh
+bash les.sh > les.log
+```
+
+[Report here](logs/)
