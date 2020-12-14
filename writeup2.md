@@ -50,7 +50,7 @@ Impact
 | ------------------------------------------------------------------- | ------- | ---------------------- | --------------- |
 | [dirty.c](https://github.com/FireFart/dirtycow/blob/master/dirty.c) | ./dirty | /etc/passwd based root | PTRACE_POKEDATA |
 
-- This exploit uses the pokemon exploit of the dirtycow vulnerability as a base and automatically generates a new passwd line.
+- This exploit uses the "pokemon" exploit of the dirtycow vulnerability as a base and automatically generates a new passwd line.
 - The user will be prompted for the new password when the binary is run.
 - The original /etc/passwd file is then backed up to /tmp/passwd.bak and overwrites the root account with the generated line.
 - After running the exploit you should be able to login with the newly created user.
@@ -75,6 +75,12 @@ id
 
 # DON'T FORGET TO RESTORE YOUR /etc/passwd AFTER RUNNING THE EXPLOIT!
 mv /tmp/passwd.bak /etc/passwd
+```
+
+or run:
+
+```shell
+./scripts/exploits/dirtycow_PTRACE_POKEDATA.sh
 ```
 
 ## Sources
