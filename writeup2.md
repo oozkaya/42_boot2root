@@ -1,4 +1,4 @@
-# Root privilege escalation - Method 2: Dirty cow
+# Root privilege escalation - Method 2: Dirty cow (add /etc/passwd entry)
 
 ## LES: Linux privilege escalation auditing tool
 
@@ -44,7 +44,7 @@ Impact
 - An unprivileged local user could use this flaw to gain write access to otherwise read-only memory mappings and thus increase their privileges on the system.
 - This flaw allows an attacker with a local system account to modify on-disk binaries, bypassing the standard permission mechanisms that would prevent modification without an appropriate permission set.
 
-### Exploit: Pokemon exploit of the dirtycow vulnerability
+### Exploit: Generates a new password hash on the fly and modifies /etc/passwd
 
 | Link                                                                | Usage   | Description            | Family          |
 | ------------------------------------------------------------------- | ------- | ---------------------- | --------------- |
@@ -80,7 +80,7 @@ mv /tmp/passwd.bak /etc/passwd
 or run:
 
 ```shell
-./scripts/exploits/dirtycow_PTRACE_POKEDATA.sh
+./scripts/exploits/dirtycow_add_passwd_entry.sh
 ```
 
 ## Sources
