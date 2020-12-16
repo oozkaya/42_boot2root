@@ -111,7 +111,7 @@ perl linux-exploit-suggester-2.pl
   - Gives the user root by injecting shellcode into a SUID file.
 - https://gist.github.com/KrE80r/42f8629577db95782d5e4f609f437a54 ✅
   - Gives the user root by injecting shellcode into a SUID file using PTRACE_POKEDATA .
-- https://gist.github.com/ngaro/05e084ca638340723b309cd304be77b2
+- https://gist.github.com/ngaro/05e084ca638340723b309cd304be77b2 ❌
   - Gives the user root by replacing /etc/passwd
 - https://gist.github.com/chriscz/f1aca56cf15cfb7793db0141c15718cd
   - Allows user to write on files meant to be read only. Supports writing to multiple pages, not just the first
@@ -123,5 +123,5 @@ perl linux-exploit-suggester-2.pl
   -Gives the user root by replacing /etc/passwd
 - https://github.com/mengzhuo/dirty-cow-golang/blob/master/dirtyc0w.go
   - Allows user to write on files meant to be read only. implemented for arm32/x86/amd64 in Golang faster than c implement.
-- https://github.com/FireFart/dirtycow/blob/master/dirty.c
+- https://github.com/FireFart/dirtycow/blob/master/dirty.c ✅
   - Generates a new password hash on the fly and modifies /etc/passwd automatically. Just run and pwn.
