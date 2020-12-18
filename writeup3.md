@@ -1,4 +1,4 @@
-# Root privilege escalation - Bonus 2: Dirty cow (shellcode injection)
+# Root privilege escalation - Method 3: Dirty cow (shellcode injection)
 
 ## Dirty COW (Copy-On-Write)
 

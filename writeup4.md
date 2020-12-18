@@ -1,4 +1,4 @@
-# Root privilege escalation - Bonus Method 1: Boot to shell through the boot loader
+# Root privilege escalation - Method 4: Boot to shell through the boot loader
 
 There are three ways to pass options to the kernel and thus control its behaviour:
 

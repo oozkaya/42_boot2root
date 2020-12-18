@@ -1,6 +1,6 @@
 #!/bin/bash
 
-output = "turtle.decoded"
+output="turtle.decoded"
 
 echo "import turtle" > $output
 echo "t = turtle.Turtle()" >> $output
